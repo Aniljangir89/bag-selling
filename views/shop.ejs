@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<body>
+            
+    <% if (messages.error.length > 0) { %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
+            <% messages.error.forEach(function(msg) { %>
+                <span class="inline-block mt-1 mb-1 text-white"><%= msg %></span>
+            <% }) %>
+        </div>
+    <% } %>
+    
+    <% if (messages.success.length > 0) { %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-green-500">
+            <% messages.success.forEach(function(msg) { %>
+                <span class="inline-block mt-1 mb-1 text-white"><%= msg %></span>
+            <% }) %>
+        </div>
+    <% } %>
+    
+   <div class="w-full h-screen flex items-start px-5 py-10 mt-10">
+    <!-- Sidebar Section -->
+    <div class="w-full h-full bg-blue-500 mr-5 p-2.5 sm:w-[20%] md:w-[20%] lg:w-[20%] flex flex-col items-start">
+        <!-- Sort by Dropdown -->
+        <div class="flex items-center gap-2 mb-8">
+            <h3>Sort by</h3>
+            <form action="/shop" class="flex items-center">
+                <select class="border-[1px] px-2 py-1 " name="sortby" id="">
+                    <option value="popular">Popular</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </form>
+        </div>
+
+        <!-- Links Section -->
+        <div class="flex flex-col mt-4">
+            <a class="block w-fit mb-2 text-gray-700 hover:text-black text-white" href="">New Collection</a>
+            <a class="block w-fit mb-2 text-gray-700 hover:text-black text-white" href="/shop">All Products</a>
+            <a class="block w-fit mb-2 text-gray-700 hover:text-black text-white" href="">Discounted Products</a>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="mt-8">
+            <a class="block w-fit mb-2 text-gray-700 hover:text-black flex items-center justify-between text-white" href="/users/mycart">
+                <span>Cart</span>
+                <span id="cart-length" class="font-bold text-black w-8 h-8 rounded-full flex items-center justify-center text-center ml-40"><%= user.cart.length %></span>
+              </a>
+              
+              
+              
+              
+            <a class="block w-fit mb-2 text-gray-700 hover:text-black text-white" href="">Discount</a>
+        </div>
+
+        <div class="mt-auto mt-8 p-4 text-white text-center border-t border-gray-200">
+            <div class="h-70 w-70">
+                <img class="h-50 w-50" src="/images/profile-logo.png" alt="">
+            </div>
+            <% if (user) { %>
+                <p class="font-semibold">Welcome, <%= user.fullname %>!</p>
+                <p class="text-sm">Email: <%= user.email %></p>
+            <% } else { %>
+                <p>Not logged in</p>
+            <% } %>
+        </div>
+    </div>
+
+ <!-- Product Listings Section -->
+<div class="w-full sm:w-[80%] md:w-[80%] lg:w-[80%] flex flex-wrap gap-5">
+    <% products.forEach(function(product) { %>
+        <div class="w-full sm:w-60 md:w-60 lg:w-60">
+            <!-- Product Image -->
+            <div class="w-full h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]">
+                <% if (product.imageBase64) { %>
+                    <img class="h-[12rem] object-cover" src="data:image/jpeg;base64,<%= product.imageBase64 %>" alt="Product Image">
+                <% } else { %>
+                    <p>No image available</p> <!-- Fallback message if no image exists -->
+                <% } %>
+            </div>
+
+            <!-- Product Details -->
+            <div class="flex justify-between bg-[<%= product.panelcolor %>] items-center px-4 py-4 text-[<%= product.textcolor %>]">
+                <div>
+                    <h3><%= product.name %></h3>
+                    <h4>₹ <%= product.price %></h4>
+                </div>
+                
+                <!-- Add to Cart Button (Form) -->
+                <form action="/users/cart" method="POST">
+                    <input type="hidden" name="productId" value="<%= product._id %>">
+                    <input type="hidden" name="productName" value="<%= product.name %>">
+                    <input type="hidden" name="productPrice" value="<%= product.price %>">
+                    <input type="hidden" name="productBgcolor" value="<%= product.bgcolor %>">
+                    <input type="hidden" name="productPanelcolor" value="<%= product.panelcolor %>">
+                    <input type="hidden" name="productTextcolor" value="<%= product.textcolor %>">
+                    <button type="submit" class="w-7 h-7 flex items-center justify-center rounded-full bg-white hover:bg-gray-200">
+                        <i class="ri-add-line"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+</div>
+  
+<script>
+    // Get the cart length element
+    const cartLengthElement = document.getElementById('cart-length');
+  
+    // Define a list of colors to cycle through
+    const colors = ['red', 'green', 'blue', 'purple', 'orange', 'pink'];
+    let currentColorIndex = 0;
+  
+    // Function to change the color of the cart length
+    function changeCartLengthColor() {
+      // Set the color to the current one in the array
+      cartLengthElement.style.backgroundColor = colors[currentColorIndex];
+  
+      // Move to the next color in the array
+      currentColorIndex = (currentColorIndex + 1) % colors.length; // Cycle through the array
+    }
+  
+    // Change color every 1 second
+    setInterval(changeCartLengthColor, 1000);
+  </script>
+</body>
+ 
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-zinc-500">
+    <div class="w-full h-screen px-20 py-20">
+        <h1 class="text-3xl font-semibold mb-10">Your Cart</h1>
+
+        <!-- Cart Items Section -->
+        <div class="w-full flex flex-col gap-5">
+            <% if (cart.length > 0) { %>
+                <% cart.forEach(function(item) { %>
+                    <div class="w-full sm:w-[80%] md:w-[80%] lg:w-[80%] flex items-center justify-between gap-5 border-b-2 py-4">
+                        <!-- Product Info -->
+                        <div class="w-[50%]">
+                            <h3 class="text-xl font-semibold"><%= item.productId.name %></h3>
+                            <h4 class="text-lg">₹ <%= item.productId.price %></h4>
+                        </div>
+
+                        <!-- Quantity Control -->
+                        <div class="flex items-center gap-3">
+                            <button id="decreaseQty_<%= item._id %>" class="w-7 h-7   flex rounded-full items-center justify-center ri-subtract-line  bg-red-500"></button>
+                            <div id="quantity_<%= item._id %>" class="px-3 py-1 rounded-md bg-gray-100 text-black"><%= item.quantity %></div>
+                            <button id="increaseQty_<%= item._id %>" class="w-7 h-7  flex rounded-full items-center justify-center ri-add-line bg-green-500"></button>
+                        </div>
+
+                        <!-- Item Total -->
+                        <div class="w-[15%]">
+                            <h3 class="text-lg">₹ <span id="total_<%= item._id %>"><%= item.productId.price * item.quantity %></span></h3>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>Your cart is empty. Add some products to your cart!</p>
+            <% } %>
+        </div>
+
+        <!-- Total Summary Section -->
+        <div class="w-full mt-10 flex justify-between px-5 py-3 border-t-2">
+            <h2 class="text-2xl">Total Amount</h2>
+            <h2 id="finalTotal" class="text-2xl font-semibold text-green-600">₹ <%= totalAmount %></h2>
+        </div>
+
+        <!-- Checkout Button -->
+        <form action="/checkout" method="POST" class="mt-5">
+            <button type="submit" class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-md">Proceed to Checkout</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

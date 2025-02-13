@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+</head>
+
+<body>
+    <div class="flash">
+        <!-- Display error messages -->
+        <% if (messages.error && messages.error.length> 0) { %>
+            <div class="alert alert-danger">
+                <ul>
+                    <% messages.error.forEach(function(msg) { %>
+                        <li>
+                            <%= msg %>
+                        </li>
+                        <% }); %>
+                </ul>
+            </div>
+            <% } %>
+
+                <!-- Display success messages -->
+                <% if (messages.success && messages.success.length> 0) { %>
+                    <div class="alert alert-success">
+                        <ul>
+                            <% messages.success.forEach(function(msg) { %>
+                                <li>
+                                    <%= msg %>
+                                </li>
+                                <% }); %>
+                        </ul>
+                    </div>
+                    <% } %>
+    </div>
+    <div class="form-container">
+        <h2>login</h2>
+        <!-- Registration Form -->
+        <form id="Loginform" action="/users/login" method="post">
+
+
+            <input type="email" id="email" name="email" placeholder="Email" required>
+
+            <input type="password" id="password" placeholder="Password" name="password" required>
+
+            <button type="submit">submit</button>
+
+            <div class="login">
+                <p>New User</p>
+                <a href="/">&rarr;</a>
+            </div>
+        </form>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

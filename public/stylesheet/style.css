@@ -1,0 +1,130 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+*{
+    margin: 0;padding: 0;
+    box-sizing: border-box;
+}
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin: 30px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#registrationForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  
+}
+
+button {
+    width: 30%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.login{
+    display: inline-block;
+    margin: 10px;
+}
+.login p{
+    display: inline;
+    font-size: smaller;
+
+}
+.login a{
+    display: inline;
+    text-decoration: none;
+    background-color: #28a745;
+    border-radius: 50%;
+    padding: 4px;
+    color: white;
+    font-weight: bold;
+}
+.register{
+    display: inline-block;
+    margin: 10px;
+}
+.register p{
+    display: inline;
+    font-size: smaller;
+
+}
+.register a{
+    display: inline;
+    text-decoration: none;
+    background-color: #28a745;
+    border-radius: 50%;
+    padding: 4px;
+    color: white;
+    font-weight: bold;
+}
+.flash {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    z-index: 9999;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    color: #b40a0a;  
+    width: fit-content;
+    transform: translateX(-50%);
+  
+}
+#Loginform{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flash .alert {
+    margin: 0;
+    padding: 10px;
+    font-size: 16px;
+    list-style: none;
+}
+.flash:empty{
+    display: none;
+}
+.alert{
+    border-bottom: 2px solid black; 
+}
